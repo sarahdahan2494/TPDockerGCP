@@ -1,0 +1,29 @@
+# version: '3.6'
+services:
+    app:
+        image: debian
+        container_name: 'debian_container' 
+    web:
+        #image: httpd 
+        build: ./../ex3/.
+        container_name: 'web_application'
+        ports:
+            - 4000:3000
+        depends_on:
+            - bd 
+        networks:
+            - n1
+            - n2
+    bd:
+        image: mariadb
+        container_name: 'db_container'
+        environment: 
+            MARIADB_ROOT_PASSWORD: root
+        networks:
+            - n1
+networks:
+    n1:
+        name: 'n1'
+    n2:
+        name: 'n2'
+        

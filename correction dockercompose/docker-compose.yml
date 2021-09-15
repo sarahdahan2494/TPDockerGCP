@@ -1,0 +1,22 @@
+services:
+    db:
+        image: mariadb
+        network:
+            - n1
+        volume:
+            - volume-db:/var/lib/mysql
+        environment: 
+            - MARIADB_ROOT_PASSWORD=root
+    application: 
+        build: ./../Script.py/.
+        networks:
+            - n1
+        depends_on:
+            - bd 
+networks:
+    n1:
+        name: 'n1'
+volumes:
+    volume-db:/var/lib/mysql
+
+        
